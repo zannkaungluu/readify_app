@@ -4,16 +4,21 @@ import {Styles} from '../../constants/Styles';
 import {colors} from '../../constants/themes';
 import {scaleHeight, scaleWidth} from '../../utils/responsive';
 import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
 
 const Login = () => {
-    // toggle between login and sign up
+  // toggle between login and sign up
   const [isLogin, setIsLogin] = useState(true);
 
   return (
     <View style={styles.container}>
       {/* header text */}
       <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>Welcome back!</Text>
+        {isLogin ? (
+          <Text style={styles.headerText}>Welcome back!</Text>
+        ) : (
+          <Text style={styles.headerText}>Join us today!</Text>
+        )}
       </View>
       {/* login and sign up buttons */}
       <View style={styles.toggleContainer}>
@@ -50,8 +55,9 @@ const Login = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      <View>
-        <SignIn />
+      {/* form */}
+      <View style={styles.formContainer}>
+        {isLogin ? <SignIn /> : <SignUp />}
       </View>
     </View>
   );
@@ -76,8 +82,8 @@ const styles = StyleSheet.create({
     ...Styles.row,
     position: 'absolute',
     top: scaleHeight(300),
-    left: scaleWidth(10),
-    width: scaleWidth(350),
+    left: scaleWidth(22),
+    width: scaleWidth(330),
     borderWidth: 1,
     borderRadius: 50,
     borderColor: colors.dark_blue,
@@ -110,5 +116,10 @@ const styles = StyleSheet.create({
   },
   signupText: {
     ...Styles.Gato_Req_18,
+  },
+  formContainer: {
+    left: scaleWidth(22),
+    position: 'absolute',
+    top: scaleHeight(400),
   },
 });
